@@ -1,30 +1,30 @@
 import React, { useState } from 'react'
 import './App.css'
 
-{/* Set cordenades Type */}
+{/* Set coordinates Type */}
 
-interface cordenadeType {
+interface coordinateType {
   pageX: number
   pageY: number
 }
 
 function App() {
-  const [cordenade, setCordenade] = useState<cordenadeType[]>([]);
-  const [lastUndo, setLastUndo] = useState<cordenadeType[]>([]);
+  const [coordinate, setCoordinate] = useState<coordinateType[]>([]);
+  const [lastUndo, setLastUndo] = useState<coordinateType[]>([]);
 
-  function getCordenades(e: React.MouseEvent<HTMLElement>) {
+  function getCoordinates(e: React.MouseEvent<HTMLElement>) {
     const { pageX, pageY} = e;
 
-    setCordenade([...cordenade, {pageX, pageY}]);
+    setCoordinate([...coordinate, {pageX, pageY}]);
     setLastUndo([]);
   }
 
   function undo() {
-    const lastClicked = [...cordenade];
-    const lastUndoned = lastClicked.pop();
-    setCordenade(lastClicked);
-    if (!lastUndo || !lastUndoned) return
-    setLastUndo([...lastUndo, lastUndoned])
+    const lastClicked = [...coordinate];
+    const lastUndone = lastClicked.pop();
+    setCoordinate(lastClicked);
+    if (!lastUndo || !lastUndone) return
+    setLastUndo([...lastUndo, lastUndone])
   }
 
   function redo() {
@@ -32,20 +32,20 @@ function App() {
     const newPoint = undoSave.pop();
     setLastUndo(undoSave);
     if (!newPoint) return;
-    setCordenade([...cordenade, newPoint]);
+    setCoordinate([...coordinate, newPoint]);
   }
 
   return (
     <div className="App">
       <div className='buttons'>
-      <button disabled={cordenade.length === 0} onClick={undo} className='button'>undo</button>
+      <button disabled={coordinate.length === 0} onClick={undo} className='button'>undo</button>
       <button disabled={lastUndo.length === 0} onClick={redo} className='button'>redo</button>
       </div>
       <div>
         <h1 className='credit'>Created by <a href='https://www.lymei.art' target='_blank'>Felipe Cardoso</a></h1>
       </div>
-      <div className='canvas' onClick={getCordenades}>
-        {cordenade.map((data, index) => {
+      <div className='canvas' onClick={getCoordinates}>
+        {coordinate.map((data, index) => {
         return <div key={index} style={{position: 'absolute', left: data.pageX, top: data.pageY}} className='circle'></div>
       })}
       </div>
