@@ -38,8 +38,8 @@ function App() {
   return (
     <div className="App">
       <div className='buttons'>
-      <button disabled={coordinate.length === 0} onClick={undo} className='button'>undo</button>
-      <button disabled={lastUndo.length === 0} onClick={redo} className='button'>redo</button>
+      	<button disabled={coordinate.length === 0} onClick={undo} className='button'>undo</button>
+      	<button disabled={lastUndo.length === 0} onClick={redo} className='button'>redo</button>
       </div>
       <div>
         <h1 className='credit'>Created by <a href='https://www.lymei.art' target='_blank'>Felipe Cardoso</a></h1>
