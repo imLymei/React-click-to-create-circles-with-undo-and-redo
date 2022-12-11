@@ -41,6 +41,9 @@ function App() {
       <button disabled={cordenade.length === 0} onClick={undo} className='button'>undo</button>
       <button disabled={lastUndo.length === 0} onClick={redo} className='button'>redo</button>
       </div>
+      <div>
+        <h1 className='credit'>Created by <a href='https://www.lymei.art' target='_blank'>Felipe Cardoso</a></h1>
+      </div>
       <div className='canvas' onClick={getCordenades}>
         {cordenade.map((data, index) => {
         return <div key={index} style={{position: 'absolute', left: data.pageX, top: data.pageY}} className='circle'></div>
