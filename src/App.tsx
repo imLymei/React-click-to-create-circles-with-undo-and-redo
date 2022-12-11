@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'
 
-{/* Set coordinates Type */}
+// * Set coordinate type for TypeScript
 
 interface coordinateType {
   pageX: number
@@ -9,8 +9,13 @@ interface coordinateType {
 }
 
 function App() {
+
+	// * Constants variables for coordinates and undos
+
   const [coordinate, setCoordinate] = useState<coordinateType[]>([]);
   const [lastUndo, setLastUndo] = useState<coordinateType[]>([]);
+
+	// * Function to get mouse click events and save mouse's coordinate X and Y in coordinate variable and reset redo variable
 
   function getCoordinates(e: React.MouseEvent<HTMLElement>) {
     const { pageX, pageY} = e;
@@ -19,6 +24,8 @@ function App() {
     setLastUndo([]);
   }
 
+	// * Function to delete last circle created and storage it in the undo variable
+
   function undo() {
     const lastClicked = [...coordinate];
     const lastUndone = lastClicked.pop();
@@ -26,6 +33,8 @@ function App() {
     if (!lastUndo || !lastUndone) return
     setLastUndo([...lastUndo, lastUndone])
   }
+
+	// * Function to re add last deleted circle in the variable coordinate and remove it from the undo variable
 
   function redo() {
     const undoSave = [...lastUndo];
